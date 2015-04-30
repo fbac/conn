@@ -1,0 +1,19 @@
+conn(1)	User Commands
+
+NAME
+       conn - a simple ssh/scp connection manager for cygwin users.
+
+SYNOPSIS
+       conn [OPTION]
+
+OPTIONS
+	c
+		create a ssh connection
+	u
+		uploads a file to a provided server
+	d
+		downloads a file from provided server
+	-d
+		show default values
+	-h
+		show this help

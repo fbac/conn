@@ -1,0 +1,73 @@
+#!/bin/bash
+# author: fbac
+# date: 2015/03/27
+# version: alpha
+# description: conn function libs
+
+# basic menu
+function main() {
+case "${1}" in
+        "-v")
+                echo "version: ${version} "
+        ;;
+        "c")
+                fssh $2 $3 $4
+        ;;
+        "u")
+                fscpu $2 $3 $4 $5
+        ;;
+        "d")
+                fscpd $2 $3 $4 $5
+        ;;
+        "-d")
+                defaults
+        ;;
+        "-h")
+                man
+        ;;
+        *)
+                echo "Unknown option. Show help with -h."
+        ;;
+esac
+}
+
+
+# conn: basic ssh
+function fssh() {
+if [ $1 ]; then
+        mintty -o Title="$1" -o Log=${logpath}/`date +"%Y%m%d_%H%M%S"`-${1}.log --exec ${sshpath} -p ${3-"$defaultport"} ${2-"$defaultuser"}@"$1" &
+else
+        echo "Usage: conn c <host> [user] [port]"
+fi
+}
+
+# conn: basic scp upload
+function fscpu() {
+if [ $1 ]; then
+        ${scppath} -oPort=${4-"$defaultport"} $2 ${3-"$defaultuser"}@"$1":"$defaultuppath"
+else
+        echo "Usage: conn u <host> <local-path-to-file> [user] [port]"
+fi
+}
+
+# conn: basic scp download
+function fscpd() {
+if [ $1 ]; then
+        ${scppath} -oPort=${4-$defaultport} ${3-"$defaultuser"}@"$1":"$2" "$defaultdownpath"
+else
+        echo "Usage: conn d <host> <remote-path-to-file> [user] [port]"
+fi
+}
+
+# conn: default values
+function defaults() {
+	echo "default user: ${defaultuser}"
+	echo "default port: ${defaultport}"
+	echo "default upload path: ${defaultuppath}"
+	echo "default download path: ${defaultdownpath}"
+}
+
+# show man
+function man() {
+	cat ${libpath}/man.lib
+}

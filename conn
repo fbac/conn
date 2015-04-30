@@ -1,0 +1,13 @@
+#!/bin/bash
+# author: fbac
+# date: 2015/03/27
+# version: alpha
+# description: conn is a simple ssh/scp connection manager for cygwin users. 
+
+libpath="/home/Administrador/conn/lib"
+etcpath="/home/Administrador/conn/etc"
+
+. ${libpath}/libconn.lib
+. ${etcpath}/conn.conf
+
+main "$@"
