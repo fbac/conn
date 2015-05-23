@@ -4,8 +4,8 @@
 # version: alpha
 # description: conn is a simple ssh/scp connection manager for cygwin users. 
 
-libpath="/home/Administrador/conn/lib"
-etcpath="/home/Administrador/conn/etc"
+libpath="/foo/bar/conn/lib"
+etcpath="/foo/bar/conn/etc"
 
 . ${libpath}/libconn.lib
 . ${etcpath}/conn.conf
